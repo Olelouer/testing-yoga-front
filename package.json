@@ -5,7 +5,7 @@
     "start": "ng serve",
     "test": "jest",
     "test:watch": "jest --watch",
-    "test:integration": "jest --testMatch=\"**/*.integration.spec.ts\" --coverage",
+    "test:coverage": "npx jest --coverage",
     "lint": "ng lint",
     "e2e": "ng e2e",
     "e2e:ci": "ng run yoga:e2e-ci",
