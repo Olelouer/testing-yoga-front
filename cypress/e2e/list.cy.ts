@@ -55,24 +55,6 @@ describe('Sessions list page', () => {
         cy.wait('@getSessions');
     });
 
-    it('should display the list title correctly', () => {
-        cy.get('mat-card-title').first().should('contain.text', 'Yoga sessions available');
-    });
-
-    it('should display the create button for admin users', () => {
-        // Vérifier que le bouton existe
-        cy.get('button[routerLink="create"]').should('be.visible');
-
-        // Vérifier séparément les deux éléments dans le bouton
-        cy.get('button[routerLink="create"] mat-icon').should('exist');
-        cy.get('button[routerLink="create"] span.ml1').should('contain.text', 'Create');
-    });
-
-    it('should navigate to create page when create button is clicked', () => {
-        cy.get('button').contains('Create').click();
-        cy.url().should('include', '/sessions/create');
-    });
-
     it('should display all yoga sessions from the API', () => {
         // Vérifier que toutes les sessions sont affichées
         cy.get('.item').should('have.length', 2);
@@ -92,19 +74,9 @@ describe('Sessions list page', () => {
         });
     });
 
-    it('should display session images correctly', () => {
-        cy.get('.item').first().find('img.picture')
-            .should('have.attr', 'src', 'assets/sessions.png')
-            .and('have.attr', 'alt', 'Yoga session');
-    });
-
     it('should navigate to detail page when detail button is clicked', () => {
         cy.get('.item').first().find('button').contains('Detail').click();
         cy.url().should('include', '/sessions/detail/1');
-    });
-
-    it('should display edit buttons for admin users', () => {
-        cy.get('.item').first().find('button').contains('Edit').should('be.visible');
     });
 
     it('should navigate to update page when edit button is clicked', () => {

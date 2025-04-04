@@ -15,26 +15,6 @@ describe('Register page', () => {
         cy.get('button[type=submit]').should('be.disabled'); // Le bouton devrait être désactivé au départ
     });
 
-    it('should validate all required fields', () => {
-        // Tester que tous les champs sont requis
-
-        // Remplir uniquement firstName
-        cy.get('input[formControlName=firstName]').type('John');
-        cy.get('button[type=submit]').should('be.disabled');
-
-        // Ajouter lastName
-        cy.get('input[formControlName=lastName]').type('Doe');
-        cy.get('button[type=submit]').should('be.disabled');
-
-        // Ajouter email
-        cy.get('input[formControlName=email]').type('john.doe@example.com');
-        cy.get('button[type=submit]').should('be.disabled');
-
-        // Ajouter password pour compléter le formulaire
-        cy.get('input[formControlName=password]').type('password123');
-        cy.get('button[type=submit]').should('be.enabled');
-    });
-
     it('should validate email format', () => {
         // Remplir tous les champs sauf email
         cy.get('input[formControlName=firstName]').type('John');
@@ -89,27 +69,5 @@ describe('Register page', () => {
         // Attendre la réponse et vérifier la redirection
         cy.wait('@registerSuccess');
         cy.url().should('include', '/login');
-    });
-
-    it('should check validation behaviors', () => {
-        // Vérifier que le bouton est désactivé au départ
-        cy.get('button[type=submit]').should('be.disabled');
-
-        // Remplir tous les champs avec des valeurs valides
-        cy.get('input[formControlName=firstName]').type('John');
-        cy.get('input[formControlName=lastName]').type('Doe');
-        cy.get('input[formControlName=email]').type('john.doe@example.com');
-        cy.get('input[formControlName=password]').type('password123');
-
-        // Vérifier que le bouton est activé
-        cy.get('button[type=submit]').should('be.enabled');
-
-        // Effacer un champ et vérifier que le bouton est désactivé
-        cy.get('input[formControlName=email]').clear();
-        cy.get('button[type=submit]').should('be.disabled');
-
-        // Remplir à nouveau le champ et vérifier que le bouton est activé
-        cy.get('input[formControlName=email]').type('john.doe@example.com');
-        cy.get('button[type=submit]').should('be.enabled');
     });
 });

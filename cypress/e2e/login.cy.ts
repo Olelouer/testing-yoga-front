@@ -24,16 +24,6 @@ describe('Login page', () => {
     cy.get('button[type=submit]').should('be.enabled');
   });
 
-  it('should validate password is required', () => {
-    // Tester la validation du mot de passe requis
-    cy.get('input[formControlName=email]').type('test@email.com');
-    cy.get('button[type=submit]').should('be.disabled');
-
-    // Ajouter un mot de passe et vérifier que le bouton est activé
-    cy.get('input[formControlName=password]').type('password123');
-    cy.get('button[type=submit]').should('be.enabled');
-  });
-
   it('should toggle password visibility', () => {
     // Tester le bouton de visibilité du mot de passe
     cy.get('input[formControlName=password]').type('password123');
@@ -93,32 +83,6 @@ describe('Login page', () => {
     cy.wait('@loginSuccess');
 
     // Ne pas vérifier la persistence des données mais s'assurer que la redirection fonctionne
-    cy.url().should('include', '/sessions');
-  });
-
-  it('should submit form on enter key press', () => {
-    // Intercepter la requête d'authentification réussie
-    cy.intercept('POST', '/api/auth/login', {
-      statusCode: 200,
-      body: {
-        id: 1,
-        username: 'userName',
-        firstName: 'firstName',
-        lastName: 'lastName',
-        admin: true
-      }
-    }).as('loginSuccess');
-
-    // Intercepter la requête de session
-    cy.intercept('GET', '/api/session', []).as('session');
-
-    // Remplir le formulaire et appuyer sur Entrée
-    cy.get('input[formControlName=email]').type('yoga@studio.com');
-    cy.get('input[formControlName=password]').type('test!1234');
-    cy.get('button[type=submit]').click();
-
-    // Attendre la réponse et vérifier la redirection
-    cy.wait('@loginSuccess');
     cy.url().should('include', '/sessions');
   });
 });

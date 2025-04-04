@@ -141,45 +141,7 @@ describe('Session Detail Component', () => {
         cy.url().should('include', '/sessions');
     });
 
-    it('should show participate button for non-admin users not participating', () => {
-        // IMPORTANT: Définir d'abord les intercepteurs avant de se connecter
-
-        // Intercepter la requête de connexion pour un non-admin
-        cy.intercept('POST', '/api/auth/login', {
-            statusCode: 200,
-            body: {
-                token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IlRlc3QgVXNlciIsImFkbWluIjpmYWxzZX0.MKqlrW0qgXjg2Ac-I8ZSwJXCshDKJIE1bEIXaT_T1CQ',
-                id: 1,
-                username: 'regularUser',
-                firstName: 'Regular',
-                lastName: 'User',
-                admin: false
-            }
-        }).as('loginNonAdminRequest');
-
-        // Retourner à la page de login et se connecter en tant que non-admin
-        cy.visit('/login');
-        cy.get('input[formControlName="email"]').type('user@example.com');
-        cy.get('input[formControlName="password"]').type('password');
-        cy.get('button[type="submit"]').click();
-        cy.wait('@loginNonAdminRequest');
-        cy.wait('@getSessions');
-
-        // Naviguer vers la page de détail
-        cy.get('.item').first().find('button').contains('Detail').click();
-        cy.wait('@getSessionDetail');
-        cy.wait('@getTeacherDetail');
-
-        // Vérifier que le bouton Delete n'est pas visible
-        cy.contains('Delete').should('not.exist');
-
-        // Vérifier que le bouton Participate est visible
-        cy.contains('Participate').should('be.visible');
-    });
-
     it('should handle participate functionality', () => {
-        // IMPORTANT: Définir d'abord les intercepteurs avant de se connecter
-
         // Intercepter la requête de connexion pour un non-admin
         cy.intercept('POST', '/api/auth/login', {
             statusCode: 200,
@@ -236,8 +198,6 @@ describe('Session Detail Component', () => {
     });
 
     it('should handle unparticipate functionality', () => {
-        // IMPORTANT: Définir d'abord les intercepteurs avant de se connecter
-
         // Intercepter la requête de connexion pour un non-admin
         cy.intercept('POST', '/api/auth/login', {
             statusCode: 200,

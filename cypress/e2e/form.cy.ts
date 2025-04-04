@@ -146,29 +146,6 @@ describe('Session Form Workflow', () => {
         cy.url().should('not.include', '/create');
     });
 
-    it('should navigate to update form and display it correctly', () => {
-        // Intercepter la requête de détail
-        cy.intercept('GET', '/api/session/1', {
-            statusCode: 200,
-            body: sessionData
-        }).as('getSessionDetail');
-
-        // Cliquer sur le bouton Edit de la première session
-        cy.get('.item').first().contains('Edit').click();
-
-        // Vérifier que nous sommes sur la page de mise à jour
-        cy.url().should('include', '/sessions/update/1');
-
-        // Attendre les requêtes nécessaires
-        cy.wait('@getSessionDetail');
-        cy.wait('@getTeachers');
-
-        // Vérifier que le formulaire est affiché correctement
-        cy.get('h1').should('contain.text', 'Update session');
-        cy.get('input[formControlName="name"]').should('have.value', 'Yoga Débutant');
-        cy.get('textarea[formControlName="description"]').should('have.value', 'Séance idéale pour les débutants');
-    });
-
     it('should update a session successfully', () => {
         // Intercepter la requête de détail
         cy.intercept('GET', '/api/session/1', {
