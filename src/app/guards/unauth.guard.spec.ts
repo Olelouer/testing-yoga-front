@@ -34,7 +34,7 @@ describe('UnauthGuard', () => {
         expect(navigateSpy).toHaveBeenCalledWith(['rentals']);
     });
 
-    it('sshould allow access if the user is not logged in', () => {
+    it('should allow access if the user is not logged in', () => {
         sessionService.isLogged = false;
 
         expect(unauthGuard.canActivate()).toBe(true);
