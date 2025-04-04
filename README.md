@@ -1,72 +1,93 @@
-# Yoga
+# Frontend Yoga App (testing-yoga-front)
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.1.0.
+Ce module constitue la partie frontend de l'application Yoga App, développée avec Angular.
 
-## Start the project
+## Prérequis
 
-Git clone:
+- Node.js (version 14 ou supérieure)
+- Angular CLI (version 14)
 
-> git clone https://github.com/OpenClassrooms-Student-Center/P5-Full-Stack-testing
+## Installation et démarrage
 
-Go inside folder:
+### Si vous utilisez ce module comme partie du projet principal :
 
-> cd yoga
+Voir le README principal à la racine du projet pour les instructions de clonage avec sous-modules.
 
-Install dependencies:
+### Si vous utilisez ce module de façon autonome :
 
-> npm install
+```sh
+git clone https://github.com/Olelouer/testing-yoga-front
+cd testing-yoga-front
+npm install
+npm run start
+```
 
-Launch Front-end:
+L'application sera accessible à l'adresse [http://localhost:4200](http://localhost:4200).
 
-> npm run start;
+## Connexion à l'application
 
+### Compte administrateur
+- **Email :** yoga@studio.com
+- **Mot de passe :** test!1234
 
-## Ressources
+### Créer un compte utilisateur standard
+1. Cliquez sur "Inscription" dans la barre de navigation
+2. Remplissez le formulaire d'inscription
 
-### Mockoon env 
+## Tests
 
-### Postman collection
+L'application comprend plusieurs types de tests :
 
-For Postman import the collection
+### Tests unitaires avec Jest
 
-> ressources/postman/yoga.postman_collection.json 
+Pour exécuter les tests unitaires :
 
-by following the documentation: 
+```sh
+npm run test
+```
 
-https://learning.postman.com/docs/getting-started/importing-and-exporting-data/#importing-data-into-postman
+Pour exécuter les tests en mode watch (mise à jour en temps réel) :
 
+```sh
+npm run test:watch
+```
 
-### MySQL
+Pour générer un rapport de couverture :
 
-SQL script for creating the schema is available `ressources/sql/script.sql`
+```sh
+npm run test:coverage
+```
 
-By default the admin account is:
-- login: yoga@studio.com
-- password: test!1234
+Le rapport de couverture sera disponible dans :
+```
+coverage/lcov-report/index.html
+```
 
+### Tests end-to-end avec Cypress
 
-### Test
+Pour exécuter les tests end-to-end :
 
-#### E2E
+```sh
+npm run e2e
+```
 
-Launching e2e test:
+Pour générer un rapport de couverture E2E :
 
-> npm run e2e
+```sh
+npm run e2e:coverage
+```
 
-Generate coverage report (you should launch e2e test before):
+Pour ouvrir le tableau de bord Cypress :
 
-> npm run e2e:coverage
+```sh
+npm run cypress:open
+```
 
-Report is available here:
+Le rapport de couverture E2E sera disponible dans :
+```
+coverage/lcov-report/index.html
+```
 
-> front/coverage/lcov-report/index.html
+## Lien avec le backend
 
-#### Unitary test
-
-Launching test:
-
-> npm run test
-
-for following change:
-
-> npm run test:watch
+Ce frontend est conçu pour fonctionner avec le module backend `testing-yoga-back`. Pour des instructions complètes sur l'installation et la configuration de l'ensemble de l'application, veuillez consulter le README principal à la racine du projet.
