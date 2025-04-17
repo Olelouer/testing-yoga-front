@@ -68,7 +68,7 @@ coverage/lcov-report/index.html
 Pour exécuter les tests end-to-end :
 
 ```sh
-npm run e2e
+npm run e2e:ci
 ```
 
 Pour générer un rapport de couverture E2E :
